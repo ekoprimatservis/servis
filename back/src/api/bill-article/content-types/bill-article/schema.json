@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bill_articles",
+  "info": {
+    "singularName": "bill-article",
+    "pluralName": "bill-articles",
+    "displayName": "bill-article",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "height": {
+      "type": "float"
+    },
+    "width": {
+      "type": "float"
+    },
+    "bill": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bill.bill",
+      "inversedBy": "bill_articles"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}

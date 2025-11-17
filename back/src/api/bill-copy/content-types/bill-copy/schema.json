@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bill_copies",
+  "info": {
+    "singularName": "bill-copy",
+    "pluralName": "bill-copies",
+    "displayName": "bill-copy",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "client_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::client.client",
+      "inversedBy": "bill_copies"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "payed": {
+      "type": "boolean",
+      "default": false
+    },
+    "discount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "pickup_date": {
+      "type": "date"
+    },
+    "articles_location": {
+      "type": "integer",
+      "default": 1
+    },
+    "additionalId": {
+      "type": "string"
+    },
+    "transportReady": {
+      "type": "boolean",
+      "default": false
+    },
+    "deletedFlag": {
+      "type": "boolean",
+      "default": false
+    },
+    "paidDate": {
+      "type": "datetime"
+    },
+    "bill_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bill-article-copy.bill-article-copy",
+      "mappedBy": "bill"
+    },
+    "invoiceId": {
+      "type": "string"
+    }
+  }
+}

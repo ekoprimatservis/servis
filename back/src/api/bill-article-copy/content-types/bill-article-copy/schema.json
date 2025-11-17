@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bill_article_copies",
+  "info": {
+    "singularName": "bill-article-copy",
+    "pluralName": "bill-article-copies",
+    "displayName": "bill-article-copy",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "height": {
+      "type": "float"
+    },
+    "width": {
+      "type": "float"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article"
+    },
+    "bill": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::bill-copy.bill-copy",
+      "inversedBy": "bill_articles"
+    },
+    "articlePrice": {
+      "type": "decimal"
+    }
+  }
+}

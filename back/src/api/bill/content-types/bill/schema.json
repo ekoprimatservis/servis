@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bills",
+  "info": {
+    "singularName": "bill",
+    "pluralName": "bills",
+    "displayName": "bill",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "client_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::client.client",
+      "inversedBy": "bills"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "payed": {
+      "type": "boolean",
+      "default": false
+    },
+    "total": {
+      "type": "float"
+    },
+    "articlesCount": {
+      "type": "integer"
+    },
+    "bill_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bill-article.bill-article",
+      "mappedBy": "bill"
+    },
+    "discount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "pickup_date": {
+      "type": "date"
+    },
+    "articles_location": {
+      "type": "integer",
+      "default": 1
+    },
+    "additionalId": {
+      "type": "string"
+    },
+    "transportReady": {
+      "type": "boolean"
+    },
+    "deletedFlag": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

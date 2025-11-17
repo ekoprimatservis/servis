@@ -1,0 +1,57 @@
+import React from "react";
+import { BackButton } from "../components/BackButton";
+import { Box, Typography } from "@mui/material";
+import { theme } from "../helper/theme";
+import { BackgroundWrapper } from "../components/BackgroundWrapper";
+import { AuthWrapper } from "../components/AuthWrapper";
+import { CreateExpansesForm } from "../components/CreateExpansesForm";
+import { ExpensesList } from "../components/ExpensesList";
+import { createExpense } from "../apiCalls/useExpenses";
+
+export const ExpensesCreate = () => {
+    return (
+        <AuthWrapper>
+            <BackgroundWrapper>
+                <Box
+                    sx={{
+                        padding: "5px",
+                        height: "calc(100vh - 10px)",
+                    }}
+                >
+                    <BackButton route={"/input"} />
+                    <Box
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "90vh",
+                            flexDirection: "column",
+                        }}
+                    >
+                        <Typography
+                            gutterBottom
+                            variant="h6"
+                            component="div"
+                            sx={{
+                                minWidth: 360,
+                                display: "flex",
+                                background: theme.primary,
+                                height: "5vh",
+                                justifyContent: "space-between",
+                                flexDirection: "column",
+                                borderRadius: "15px",
+                                padding: "1% 2% 1% 2%",
+                                alignItems: "center",
+                            }}
+                        >
+                            Kreiranje novog troska
+                        </Typography>
+                        <CreateExpansesForm mutationFunction={createExpense} />
+                        <ExpensesList />
+                    </Box>
+                </Box>
+            </BackgroundWrapper>
+        </AuthWrapper>
+    );
+};

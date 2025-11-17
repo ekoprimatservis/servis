@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clients",
+  "info": {
+    "singularName": "client",
+    "pluralName": "clients",
+    "displayName": "client",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    },
+    "surname": {
+      "type": "string",
+      "required": false
+    },
+    "city": {
+      "type": "string",
+      "required": false
+    },
+    "address": {
+      "type": "string",
+      "required": false
+    },
+    "phone": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "addressNumber": {
+      "type": "string"
+    },
+    "clientType": {
+      "type": "string"
+    },
+    "bills": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bill.bill",
+      "mappedBy": "client_id"
+    },
+    "bill_copies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bill-copy.bill-copy",
+      "mappedBy": "client_id"
+    },
+    "entrance": {
+      "type": "string"
+    },
+    "floor": {
+      "type": "string"
+    },
+    "apartment": {
+      "type": "string"
+    },
+    "mobile2": {
+      "type": "string"
+    },
+    "phone2": {
+      "type": "string"
+    }
+  }
+}

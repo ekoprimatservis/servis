@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "article",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    },
+    "metric": {
+      "type": "string",
+      "required": false
+    },
+    "price": {
+      "type": "integer",
+      "required": false
+    },
+    "updated": {
+      "type": "datetime"
+    },
+    "formulaId": {
+      "type": "integer",
+      "required": false,
+      "max": 10
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}
