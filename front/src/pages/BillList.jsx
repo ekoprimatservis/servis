@@ -305,7 +305,7 @@ export const BillList = () => {
                               {row.attributes.additionalId}
                             </TableCell>
                             <TableCell align="right">
-                              {new Date(row.attributes.createdAt).toLocaleDateString("en-GB")}
+                              {new Date(row.attributes.date??row.attributes.createdAt).toLocaleDateString("en-GB")}
                             </TableCell>
                             <TableCell align="right">
                               {row.attributes.client_id.data.attributes.name || null}{" "}
