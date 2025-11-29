@@ -35,12 +35,19 @@ export const getClient = async (id) => {
     }
 }
 
-export const getClients = async (searchTerm, page, rowsPerPage) => {//[$or][name][$eqi]=${searchTerm}
-    const url = `${BASE_URL}api/clients?pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}${searchTerm ? `&filters[$or][0][name][$containsi]=${searchTerm}&filters[$or][1][surname][$containsi]=${searchTerm}` : ''}`
-    try {
-        const { data } = await axios.get(url);
-        return data
-    } catch (err) {
-        console.log(err)
-    }
+export const getClients = async (nameSurnameSearch, page, rowsPerPage, addressSearch) => {//[$or][name][$eqi]=${searchTerm}
+
+    let url = `${BASE_URL}api/clients?pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}`
+        if (nameSurnameSearch) {
+        url = `${url}&filters[$or][0][name][$containsi]=${nameSurnameSearch}&filters[$or][1][surname][$containsi]=${nameSurnameSearch}`
+        }
+        if (addressSearch) {
+        url = `${url}&filters[$and][0][address][$containsi]=${addressSearch}`
+        }
+        try {
+            const { data } = await axios.get(url);
+            return data
+        } catch (err) {
+            console.log(err)
+        }
 }

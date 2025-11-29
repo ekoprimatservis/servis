@@ -37,7 +37,7 @@ export const getBill = async (id) => {
 };
 
 export const getBills = async (date, page, rowsPerPage, filter, nameSurnameSearch, addressSearch) => {
-  let url = `${BASE_URL}api/bill-copies?pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}&populate=*&filters[deletedFlag][$eq]=false`
+  let url = `${BASE_URL}api/bill-copies?sort=date:desc&pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}&populate=*&filters[deletedFlag][$eq]=false`
   if (date) {
     const from = new Date(date.getFullYear(), date.getMonth(), 2);
     const to = new Date(date.getFullYear(), date.getMonth() + 1, 1);

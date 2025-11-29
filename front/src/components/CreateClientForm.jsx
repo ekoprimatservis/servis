@@ -161,7 +161,6 @@ export const CreateClientForm = ({ mutationFunction, id }) => {
         sx={inputStyle}
         id="outlined-basic"
         label={clientType === 'Fizicko' ? "Ime" : 'Naziv firme'}
-        required
         variant="outlined"
       />
       <TextField

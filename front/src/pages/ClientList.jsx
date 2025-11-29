@@ -15,13 +15,16 @@ import { getClients } from "../apiCalls/useClient";
 import { BackgroundWrapper } from "../components/BackgroundWrapper";
 import { formatLandLinePhone, formatPhoneNumber } from "../helper/calculations";
 import { AuthWrapper } from "../components/AuthWrapper";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { theme } from "../helper/theme";
 import TablePagination from '@mui/material/TablePagination';
 
 export const ClientList = () => {
   const navigate = useNavigate();
   const [nameSearch, setNameSearch] = useState('')
+  const [addressSearch, setAddressSearch]=useState('')
+  const [debouncedNameSurnameSearch, setDebouncedNameSurnameSearch]=useState('')
+  const [debouncedAddressSearch,setDebouncedAddressSearch]=useState('')
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(100);
 
@@ -34,9 +37,28 @@ export const ClientList = () => {
     setPage(0);
   };
   const { data, isLoading } = useQuery(
-    ["clients", nameSearch, page, rowsPerPage],
-    async () => await getClients(nameSearch, page, rowsPerPage)
+    ["clients", debouncedNameSurnameSearch, page, rowsPerPage, debouncedAddressSearch],
+    async () => await getClients(nameSearch, page, rowsPerPage, addressSearch)
   );
+  useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedNameSurnameSearch(nameSearch);
+      }, 500); // 500ms debounce
+  
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [nameSearch]);
+  
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedAddressSearch(addressSearch);
+      }, 500);
+  
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [addressSearch]);
 
   return (
     <AuthWrapper>
@@ -54,9 +76,12 @@ export const ClientList = () => {
               display: "flex",
               background: theme.primary,
               justifyContent: "space-between",
-              flexDirection: "column",
+              // flexDirection: "column",
               borderRadius: "15px",
+              flexWrap:'wrap',
               padding: "1.5%",
+              alignItems:'center',
+              justifyContent:'space-evenly'
             }}>
               <TextField
                 value={nameSearch}
@@ -65,6 +90,15 @@ export const ClientList = () => {
                 // sx={inputStyle}
                 id="outlined-basic"
                 label={'Pretraga po imenu ili prezimenu'}
+                variant="outlined"
+              />
+              <TextField
+                value={addressSearch}
+                onChange={(e) => { setAddressSearch(e.target.value); setPage(0) }}
+                size="small"
+                // sx={inputStyle}
+                id="outlined-basic"
+                label={'Pretraga po adresi'}
                 variant="outlined"
               />
             </Box>
@@ -101,8 +135,7 @@ export const ClientList = () => {
                 <Table stickyHeader aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell align="right">Ime</TableCell>
-                      <TableCell align="right">Prezime</TableCell>
+                      <TableCell align="right">Korisnik</TableCell>
                       <TableCell align="right">Adresa</TableCell>
                       <TableCell align="right">Broj</TableCell>
                       <TableCell align="right">Grad</TableCell>
@@ -121,14 +154,9 @@ export const ClientList = () => {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        {/* <TableCell component="th" scope="row">
-                                            {row.attributes.name}
-                                        </TableCell> */}
                         <TableCell align="right">
+                          {row.attributes.surname}{' '}
                           {row.attributes.name}
-                        </TableCell>
-                        <TableCell align="right">
-                          {row.attributes.surname}
                         </TableCell>
                         <TableCell align="right">
                           {row.attributes.address}

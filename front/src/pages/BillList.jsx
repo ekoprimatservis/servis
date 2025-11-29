@@ -266,18 +266,18 @@ export const BillList = () => {
                   <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="right">Sifra Tepiha</TableCell>
-                        <TableCell align="right">Datum</TableCell>
-                        <TableCell align="right">Klijent</TableCell>
-                        <TableCell align="right">Adresa</TableCell>
-                        <TableCell align="right">Ukupan Iznos</TableCell>
-                        <TableCell align="right">Lokacija Artikla</TableCell>
-                        <TableCell align="right">Edit</TableCell>
-                        <TableCell align="right">Spremno za Transport</TableCell>
-                        <TableCell align="right">Placen</TableCell>
-                        <TableCell align="right">Faktura</TableCell>
-                        <TableCell align="right">Racun</TableCell>
-                        <TableCell align="right">Obrisi</TableCell>
+                        <TableCell align="left">Sifra Tepiha</TableCell>
+                        <TableCell align="left">Datum</TableCell>
+                        <TableCell align="left">Klijent</TableCell>
+                        <TableCell align="left">Adresa</TableCell>
+                        <TableCell align="left">Ukupan Iznos</TableCell>
+                        <TableCell align="left">Lokacija Artikla</TableCell>
+                        <TableCell align="left">Edit</TableCell>
+                        <TableCell align="left">Spremno za Transport</TableCell>
+                        <TableCell align="left">Placen</TableCell>
+                        <TableCell align="left">Faktura</TableCell>
+                        <TableCell align="left">Racun</TableCell>
+                        <TableCell align="left">Obrisi</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -301,28 +301,28 @@ export const BillList = () => {
                               },
                             }}
                           >
-                            <TableCell align="right">
-                              {row.attributes.additionalId}
+                            <TableCell align="left">
+                              {row.attributes.additionalId==='bez sifre'? '' :row.attributes.additionalId}
                             </TableCell>
                             <TableCell align="right">
                               {new Date(row.attributes.date??row.attributes.createdAt).toLocaleDateString("en-GB")}
                             </TableCell>
-                            <TableCell align="right">
-                              {row.attributes.client_id.data.attributes.name || null}{" "}
-                              {row.attributes.client_id.data.attributes.surname || null}
+                            <TableCell align="left">
+                              {row.attributes.client_id.data.attributes.surname || null}{" "}
+                              {row.attributes.client_id.data.attributes.name || null}
                             </TableCell>
-                            {/* <TableCell align="right">
+                            {/* <TableCell align="left">
                               {row.attributes.client_id.data.attributes.address} {row.attributes.client_id.data.attributes.addressNumber}
                             </TableCell> */}
-                            <TableCell align="right">
+                            <TableCell align="left">
                               {row.attributes.client_id.data.attributes.address} {row.attributes.client_id.data.attributes.addressNumber}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                               {row.attributes.bill_articles.data.length
                                 ? `${applyDiscount(row.attributes.bill_articles.data, row.attributes.discount)} RSD`
                                 : "---"}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                               {/* {row.attributes.articles_location === 1 ? 'U magacinu' : 'Vraceno klijentu'} */}
                               <TextField
                                 disabled={(!row.attributes.additionalId && !row.attributes.payed) || row.attributes.articles_location === 2}
@@ -341,7 +341,7 @@ export const BillList = () => {
                                 <MenuItem value="2">Vraceno klijentu</MenuItem>
                               </TextField>
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                               <IconButton
                                 onClick={() =>
                                   navigate(`/bill-articles/${row.id}`)
@@ -376,7 +376,7 @@ export const BillList = () => {
                                 <PaidIcon sx={{ fill: row.attributes.payed ? 'green' : (!row.attributes.additionalId && !row.attributes.payed) || !row.attributes.bill_articles.data.length ? 'gray' : 'red' }} />
                               </IconButton>
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                               <IconButton
                                 disabled={!row.attributes.bill_articles.data.length || row.attributes.client_id.data.attributes.clientType !== 'Pravno'}
                                 onClick={() =>
@@ -386,7 +386,7 @@ export const BillList = () => {
                                 <DescriptionIcon />
                               </IconButton>
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">
                               <IconButton
                                 disabled={!row.attributes.bill_articles.data.length}
                                 onClick={() => navigate(`/bill-pdf/${row.id}`)}

@@ -143,7 +143,6 @@ export const QuickCreateClientForm = ({ mutationFunction, id, setOpenDialog, set
                 sx={inputStyle}
                 id="outlined-basic"
                 label={clientType === 'Fizicko' ? "Ime" : 'Naziv firme'}
-                required
                 variant="outlined"
             />
             <TextField

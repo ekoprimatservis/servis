@@ -419,7 +419,6 @@ export const CreateBillArticlesForm = ({ mutationFunction, id }) => {
                   <TableRow>
                     <TableCell align="right">Rb.</TableCell>
                     <TableCell align="right">Stavka</TableCell>
-                    <TableCell align="right">Datum Kreiranja</TableCell>
                     <TableCell align="right">Duzina</TableCell>
                     <TableCell align="right">Sirina</TableCell>
                     <TableCell align="right">Cena</TableCell>
@@ -439,12 +438,6 @@ export const CreateBillArticlesForm = ({ mutationFunction, id }) => {
                           {
                             row?.attributes?.article?.data?.attributes?.name
                           }
-                        </TableCell>
-                        <TableCell align="right">
-                          {format(
-                            row.attributes.createdAt,
-                            "dd/MM/yyyy, hh:mm a"
-                          )}
                         </TableCell>
                         <TableCell align="right">
                           {row.attributes.height}
