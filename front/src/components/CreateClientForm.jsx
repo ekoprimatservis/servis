@@ -59,8 +59,8 @@ export const CreateClientForm = ({ mutationFunction, id }) => {
       setCity(city);
       setAddress(address);
       setPhone(phone);
-      setMobile(mobile.replace("0", "381"));
-      setMobile2(mobile2.replace("0", "381"));
+      setMobile(mobile?.replace("0", "381"));
+      setMobile2(mobile2?.replace("0", "381"));
       setEmail(email);
       setFloor(floor)
       setEntrance(entrance)
@@ -91,7 +91,6 @@ export const CreateClientForm = ({ mutationFunction, id }) => {
       navigate("/client/list");
     }
   };
-
   const mutation = useMutation(mutationFunction, {
     onSuccess: (data) => onSuccess(data),
     onError: () => toast("Greska", { type: "error" }),
