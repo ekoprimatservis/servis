@@ -230,6 +230,9 @@ export const CreateBillArticlesForm = ({ mutationFunction, id }) => {
                 Adresa:{" "}
                 {bill?.data?.data.attributes.client_id?.data.attributes.address}{" "}
                 {bill?.data?.data.attributes.client_id?.data.attributes.addressNumber}
+                {bill?.data?.data.attributes.client_id?.data.attributes.entrance?`ulaz:${bill?.data?.data.attributes.client_id?.data.attributes.entrance}/`:null}
+                {bill?.data?.data.attributes.client_id?.data.attributes.floor?`sprat:${bill?.data?.data.attributes.client_id?.data.attributes.floor}/`:null}
+                {bill?.data?.data.attributes.client_id?.data.attributes.apartment?`stan:${bill?.data?.data.attributes.client_id?.data.attributes.apartment}/`:null}
               </Typography>
               <Typography>
                 Mobilni:{" "}

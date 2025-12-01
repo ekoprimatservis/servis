@@ -37,12 +37,12 @@ export const getClient = async (id) => {
 
 export const getClients = async (nameSurnameSearch, page, rowsPerPage, addressSearch) => {//[$or][name][$eqi]=${searchTerm}
 
-    let url = `${BASE_URL}api/clients?pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}`
+    let url = `${BASE_URL}api/clients?sort=addressNumber:asc&pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}`
         if (nameSurnameSearch) {
         url = `${url}&filters[$or][0][name][$containsi]=${nameSurnameSearch}&filters[$or][1][surname][$containsi]=${nameSurnameSearch}`
         }
         if (addressSearch) {
-        url = `${url}&filters[$and][0][address][$containsi]=${addressSearch}`
+        url = `${url}&filters[$or][0][address][$containsi]=${addressSearch}&filters[$or][1][city][$containsi]=${addressSearch}`
         }
         try {
             const { data } = await axios.get(url);

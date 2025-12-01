@@ -108,6 +108,7 @@ export const MyDoc = ({ data, id, companyInfo }) => {
                             <Text>PIB: {client?.surname}</Text>
                         </> : <Text>{client?.name} {client?.surname}</Text>}
                         <Text>{client?.address} {client?.addressNumber}</Text>
+                        <Text>{client?.entrance?`ulaz:${client?.entrance}`:null} {client?.floor?`sprat:${client?.floor}`:null} {client?.apartment?`stan:${client?.apartment}`:null}</Text>
                         <Text>{client?.city}</Text>
                         {client?.mobile ? <>
                             <Text style={{ textDecoration: 'underline' }}>Telefon:</Text>

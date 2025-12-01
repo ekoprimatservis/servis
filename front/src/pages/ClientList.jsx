@@ -138,6 +138,9 @@ export const ClientList = () => {
                       <TableCell align="right">Korisnik</TableCell>
                       <TableCell align="right">Adresa</TableCell>
                       <TableCell align="right">Broj</TableCell>
+                      <TableCell align="right">Ulaz</TableCell>
+                      <TableCell align="right">Sprat</TableCell>
+                      <TableCell align="right">Stan</TableCell>
                       <TableCell align="right">Grad</TableCell>
                       <TableCell align="right">Klijent</TableCell>
                       <TableCell align="right">Email</TableCell>
@@ -154,7 +157,7 @@ export const ClientList = () => {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell align="right">
+                        <TableCell align="left">
                           {row.attributes.surname}{' '}
                           {row.attributes.name}
                         </TableCell>
@@ -163,6 +166,15 @@ export const ClientList = () => {
                         </TableCell>
                         <TableCell align="right">
                           {row.attributes.addressNumber}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.attributes.entrance}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.attributes.floor}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.attributes.apartment}
                         </TableCell>
                         <TableCell align="right">
                           {row.attributes.city}

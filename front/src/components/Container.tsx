@@ -47,7 +47,7 @@ export const Container: FC = () => {
                     const { name, surname, address, addressNumber, city, mobile, floor, entrance, apartment } = m.attributes.client_id.data.attributes
                     return {
                         id: index + 1,
-                        text: `${m?.attributes?.additionalId || 'NEMA SIFRU'} | ${name} ${surname} | ${city} | ${address} ${addressNumber} | ${floor ? 'sprat: ' + floor + ' |' : ''} ${entrance ? 'ulaz: ' + entrance + ' |' : ''} ${apartment ? 'stan: ' + apartment + ' |' : ''} ${formatPhoneNumber(mobile) || 'NEMA BROJ'}`,
+                        text: `${m?.attributes?.additionalId || ''} | ${name} ${surname} | ${city} | ${address} ${addressNumber} | ${floor ? 'sprat: ' + floor + ' |' : ''} ${entrance ? 'ulaz: ' + entrance + ' |' : ''} ${apartment ? 'stan: ' + apartment + ' |' : ''} ${formatPhoneNumber(mobile) || 'NEMA BROJ'}`,
                         obj: m.attributes
                     }
                 }))

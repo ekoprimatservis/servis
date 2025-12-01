@@ -81,7 +81,7 @@ export const CreateBillForm = ({ mutationFunction, id, client, setClient }) => {
   const clientOptions =
     clients.data?.data.map(({ id, attributes }) => ({
       value: id,
-      label: `${attributes.name} /${attributes.surname}/ ${attributes.address} ${attributes.addressNumber} | ${attributes.mobile ? formatPhoneNumber(attributes.mobile) : ""
+      label: `${attributes.name} /${attributes.surname}/ ${attributes.address} ${attributes.addressNumber} | ${attributes?.entrance?`ulaz:${attributes?.entrance}`:''} ${attributes?.floor?`sprat:${attributes?.floor}`:''} ${attributes?.apartment?`stan:${attributes?.apartment}`:''} ${attributes.mobile ? formatPhoneNumber(attributes.mobile) : ""
         }`,
     })) || [];
 
