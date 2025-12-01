@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { getClient } from "../apiCalls/useClient";
 import { toast } from "react-toastify";
 import "react-phone-input-2/lib/style.css";
+import { formatLandLinePhone } from "../helper/calculations";
 
 const inputStyle = {
   margin: "5px 0 5px 0",
@@ -58,9 +59,9 @@ export const CreateClientForm = ({ mutationFunction, id }) => {
       setSurname(surname);
       setCity(city);
       setAddress(address);
-      setPhone(phone);
-      setMobile(mobile?.replace("0", "381"));
-      setMobile2(mobile2?.replace("0", "381"));
+      setPhone(phone?formatLandLinePhone(phone):'');
+      setMobile(mobile?.replace("06", "381"));
+      setMobile2(mobile2?.replace("06", "381"));
       setEmail(email);
       setFloor(floor)
       setEntrance(entrance)

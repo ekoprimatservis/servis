@@ -19,7 +19,7 @@ export const ClientEdit = () => {
             height: "calc(100vh - 10px)",
           }}
         >
-          <BackButton route={"/client"} />
+          <BackButton route={"/client/list"} />
           <Box
             sx={{
               width: "100%",
