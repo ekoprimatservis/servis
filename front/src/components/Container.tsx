@@ -39,7 +39,15 @@ export const Container: FC = () => {
             setFiltredData(prev => prev.filter(m => !selectedItems.includes(m.id)))
             setSelectedItems([])
         }
-
+        const formatedLocation = (id) => {
+            console.log(id)
+            switch (id) {
+                case 1: return 'U Magacinu'
+                case 2: return 'Vraceno Klijentu'
+                case 3: return 'U Transportu'
+                default: return 'Nepoznat status';
+            }
+        }
         useEffect(() => {
             if (data?.data?.length) {
                 // setFiltredData(data.data.filter(m => !m.attributes.deletedFlag && ((m.attributes.additionalId && m.attributes.payed && m.attributes.articles_location === 1) || ((!m.attributes.additionalId && !m.attributes.payed)) || m.attributes.transportReady)).map((m, index) => {
@@ -47,7 +55,7 @@ export const Container: FC = () => {
                     const { name, surname, address, addressNumber, city, mobile, floor, entrance, apartment } = m.attributes.client_id.data.attributes
                     return {
                         id: index + 1,
-                        text: `${m?.attributes?.additionalId || ''} | ${name} ${surname} | ${city} | ${address} ${addressNumber} | ${floor ? 'sprat: ' + floor + ' |' : ''} ${entrance ? 'ulaz: ' + entrance + ' |' : ''} ${apartment ? 'stan: ' + apartment + ' |' : ''} ${formatPhoneNumber(mobile) || 'NEMA BROJ'}`,
+                        text: `${m?.attributes?.additionalId || ''} | ${name} ${surname} | ${city} | ${address} ${addressNumber} | ${floor ? 'sprat: ' + floor + ' |' : ''} ${entrance ? 'ulaz: ' + entrance + ' |' : ''} ${apartment ? 'stan: ' + apartment + ' |' : ''} ${formatPhoneNumber(mobile) || 'NEMA BROJ'} // ${formatedLocation(m.attributes.articles_location)} //`,
                         obj: m.attributes
                     }
                 }))
