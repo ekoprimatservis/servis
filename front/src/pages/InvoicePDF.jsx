@@ -18,11 +18,11 @@ import { useQuery } from "react-query";
 import { getBill, getLastLawBill } from "../apiCalls/useBill";
 import { AuthWrapper } from "../components/AuthWrapper";
 import { useEffect, useState } from "react";
-import { applyDiscount } from "../helper/calculations";
+import { applyDiscount, formatLandLinePhone, formatPhoneNumber } from "../helper/calculations";
 import { getClients } from "../apiCalls/useClient";
 import { getCompanyInfo } from "../apiCalls/useCompanyInfo";
 
-const headerText = `SERVIS ZA ČISCENJE TEPIHA\nDimitrija Tucovića 9a\n22320 Inđija\nPIB: 108661394       Matični broj firme: 63609048        APR broj: BP91047/2014       Šifra delatnosti: 9601\nTekući račun: 105-0000002612679-77     AIK BANKA\nTelefon: 022/552-311     Mob telefon: 063/88-92-714      E-mail:ekoprimatservis@gmail.com\n\n*izdavalac računa nije obveznik pov-a po članu 33. Zakona o pdv.\n*izdavalac računa je paušalni obveznik poreza po članu 42. Zakona o porezu na dohodak`;
+// const headerText = `SERVIS ZA ČISCENJE TEPIHA\nDimitrija Tucovića 9a\n22320 Inđija\nPIB: 108661394       Matični broj firme: 63609048        APR broj: BP91047/2014       Šifra delatnosti: 9601\nTekući račun: 105-0000002612679-77     AIK BANKA\nTelefon: 022/552-311     Mob telefon: 063/88-92-714      E-mail:ekoprimatservis@gmail.com\n\n*izdavalac računa nije obveznik pov-a po članu 33. Zakona o pdv.\n*izdavalac računa je paušalni obveznik poreza po članu 42. Zakona o porezu na dohodak`;
 
 Font.register({
   family: 'Roboto',
@@ -81,11 +81,13 @@ export const MyDoc = ({ data, fiscalClipping, companyInfo }) => {
     postalCode = '',
     cityName = '',
     companyAddress = '',
+    bankInfo = '',
     phoneNumber = '',
     mobileNumber = '',
     email = '',
+    headerText
   } = companyInfo || {};
-
+  const headerTextConcatenated = `SERVIS ZA ČISCENJE TEPIHA\n${companyAddress}\n${postalCode} ${cityName}\nPIB: 108661394       Matični broj firme: 63609048        APR broj: BP91047/2014       Šifra delatnosti: 9601\nTekući račun: ${bankInfo}\nTelefon: ${formatLandLinePhone(phoneNumber)}     Mob telefon: ${formatPhoneNumber(mobileNumber)}      E-mail:${email}\n\n*${headerText.replace('\\n', '\n')}`
   const client = data?.client_id?.data?.attributes || {};
   const { name = '', address = '', addressNumber = '', city = '', surname = '' } = client;
 
@@ -144,7 +146,7 @@ export const MyDoc = ({ data, fiscalClipping, companyInfo }) => {
       <Page size="A5" style={styles.page}>
         <View style={styles.section}>
           <Image src={logo} style={{ width: "150px" }} />
-          <Text>{headerText}</Text>
+          <Text>{headerTextConcatenated}</Text>
         </View>
 
         <View
