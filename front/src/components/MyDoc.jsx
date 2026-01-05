@@ -96,9 +96,9 @@ export const MyDoc = ({ data, id, companyInfo }) => {
                         <Text>{companyInfo?.postalCode} {companyInfo?.cityName}</Text>
                         <Text>{formatLandLinePhone(companyInfo?.phoneNumber) || '\n'}</Text>
                         <Text>{formatPhoneNumber(companyInfo?.mobileNumber) || '\n'}</Text>
-                        <Text>{companyInfo?.email || '\n'}</Text>
-                        <Text>Šifra Tepiha:</Text>
-                        <Text style={styles.boldLarge}>{additionalId}</Text> */}
+                        <Text>{companyInfo?.email || '\n'}</Text> */}
+                        <Text style={{ paddingTop: 100 }}>Šifra Tepiha:</Text>
+                        <Text style={styles.boldLarge}>{additionalId}</Text>
                     </View>
 
                     <View style={styles.clientInfo}>
@@ -108,7 +108,13 @@ export const MyDoc = ({ data, id, companyInfo }) => {
                             <Text>PIB: {client?.surname}</Text>
                         </> : <Text>{client?.name} {client?.surname}</Text>}
                         <Text>{client?.address} {client?.addressNumber}</Text>
-                        <Text>{client?.entrance?`ulaz:${client?.entrance}`:null} {client?.floor?`sprat:${client?.floor}`:null} {client?.apartment?`stan:${client?.apartment}`:null}</Text>
+                        {(client?.entrance || client?.floor || client?.apartment) && (
+                            <Text>
+                                {client?.entrance ? `ulaz:${client.entrance} ` : ""}
+                                {client?.floor ? `sprat:${client.floor} ` : ""}
+                                {client?.apartment ? `stan:${client.apartment}` : ""}
+                            </Text>
+                        )}
                         <Text>{client?.city}</Text>
                         {client?.mobile ? <>
                             <Text style={{ textDecoration: 'underline' }}>Telefon:</Text>
@@ -146,9 +152,9 @@ export const MyDoc = ({ data, id, companyInfo }) => {
                     </View>
                 ) : null}
 
-                <View style={{ ...styles.summary, marginTop: data?.discount ? '0' : '5%', width:'70%'}}>
-                    <Text style={{...styles.clientInfo, width:550, whiteSpace:'no-wrap'}}>UKUPNO ZA NAPLATU</Text>
-                    <Text style={{...styles.clientInfo, width:350 ,whiteSpace:'no-wrap'}}>{`${applyDiscount(articles, data.discount)} RSD`}</Text>
+                <View style={{ ...styles.summary, marginTop: data?.discount ? '0' : '5%', width: '70%' }}>
+                    <Text style={{ ...styles.clientInfo, width: 550, whiteSpace: 'no-wrap' }}>UKUPNO ZA NAPLATU</Text>
+                    <Text style={{ ...styles.clientInfo, width: 350, whiteSpace: 'no-wrap' }}>{`${applyDiscount(articles, data.discount)} RSD`}</Text>
                 </View>
 
                 {/* <View style={styles.footer}>

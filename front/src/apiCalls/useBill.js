@@ -36,8 +36,8 @@ export const getBill = async (id) => {
   }
 };
 
-export const getBills = async (date, page, rowsPerPage, filter, nameSurnameSearch, addressSearch) => {
-  let url = `${BASE_URL}api/bill-copies?sort=date:desc&pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}&populate=*&filters[deletedFlag][$eq]=false`
+export const getBills = async (date, page, rowsPerPage, filter, nameSurnameSearch, addressSearch, additionalIdSearch) => {
+  let url = `${BASE_URL}api/bill-copies?sort=id:desc&pagination[page]=${page}&pagination[pageSize]=${rowsPerPage}&populate=*&filters[deletedFlag][$eq]=false`
   if (date) {
     const from = new Date(date.getFullYear(), date.getMonth(), 2);
     const to = new Date(date.getFullYear(), date.getMonth() + 1, 1);
@@ -51,6 +51,9 @@ export const getBills = async (date, page, rowsPerPage, filter, nameSurnameSearc
   }
   if (addressSearch) {
     url = `${url}&filters[$and][0][client_id][address][$containsi]=${addressSearch}`
+  }
+  if (additionalIdSearch) {
+    url = `${url}&filters[$and][0][additionalId][$containsi]=${additionalIdSearch}`
   }
   //&filters[createdAt][$between]=2023-03-07&filters[createdAt][$between]=2025-04-07
   if (filter) {
@@ -77,6 +80,10 @@ export const getBills = async (date, page, rowsPerPage, filter, nameSurnameSearc
       }
       case 'Transport': {
         url = `${url}&filters[transportReady][$eq]=true&filters[additionalId][$notNull]=true&filters[payed][$eq]=false&filters[articles_location][$eq]=1`
+        break;
+      }
+      case 'TransportList': {
+        url = `${url}&filters[$or][0][additionalId][$null]=true&filters[$or][1][articles_location][$eq]=3`
         break;
       }
     }

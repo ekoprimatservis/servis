@@ -27,7 +27,7 @@ export interface ContainerState {
 
 export const Container: FC = () => {
     {
-        const { data, isLoading } = useQuery("bills", async () => await getBills(null, 1, 100, 'Narudzbina | Ima sifru | Transport'));
+        const { data, isLoading } = useQuery("bills", async () => await getBills(null, 1, 100, 'TransportList'));
         const [filtredData, setFiltredData] = useState([{ id: 1, text: '' }])
         const [selectedItems, setSelectedItems] = useState<number[]>([])
 
@@ -43,7 +43,7 @@ export const Container: FC = () => {
         useEffect(() => {
             if (data?.data?.length) {
                 // setFiltredData(data.data.filter(m => !m.attributes.deletedFlag && ((m.attributes.additionalId && m.attributes.payed && m.attributes.articles_location === 1) || ((!m.attributes.additionalId && !m.attributes.payed)) || m.attributes.transportReady)).map((m, index) => {
-                setFiltredData(data.data.filter(m => ((m?.attributes?.additionalId && m?.attributes?.payed && m?.attributes?.articles_location === 1) || ((!m?.attributes?.additionalId && !m?.attributes?.payed)) || m?.attributes?.transportReady)).map((m, index) => {
+                setFiltredData(data.data.map((m, index) => {
                     const { name, surname, address, addressNumber, city, mobile, floor, entrance, apartment } = m.attributes.client_id.data.attributes
                     return {
                         id: index + 1,

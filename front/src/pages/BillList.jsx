@@ -65,10 +65,11 @@ export const BillList = () => {
   );
   const [nameSurnameSearch, setNameSurnameSearch] = useState('')
   const [addressSearch, setAddressSearch] = useState('')
+  const [additionalIdSearch, setAdditionalIdSearch] = useState('')
   const [debouncedNameSurnameSearch, setDebouncedNameSurnameSearch] = useState('');
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState('');
-
-  const { data, isLoading } = useQuery(["bills", page, rowsPerPage, selectedFilters, debouncedNameSurnameSearch, debouncedAddressSearch], async () => await getBills(null, page, rowsPerPage, selectedFilters, nameSurnameSearch, addressSearch));
+  const [debouncedAdditionalIdSearch, setDebouncedAdditionalIdSearch] = useState('')
+  const { data, isLoading } = useQuery(["bills", page, rowsPerPage, selectedFilters, debouncedNameSurnameSearch, debouncedAddressSearch, debouncedAdditionalIdSearch], async () => await getBills(null, page, rowsPerPage, selectedFilters, nameSurnameSearch, addressSearch, additionalIdSearch), { keepPreviousData: true });
 
 
   useEffect(() => {
@@ -90,6 +91,15 @@ export const BillList = () => {
       clearTimeout(handler);
     };
   }, [addressSearch]);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedAdditionalIdSearch(additionalIdSearch);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [additionalIdSearch]);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -202,7 +212,7 @@ export const BillList = () => {
               gap: 2,
               flexWrap: 'wrap',
             }}>
-              <FormControl sx={{ minWidth: 360 }}>
+              <FormControl sx={{ minWidth: 300 }}>
                 <InputLabel id="demo-multiple-checkbox-label">Filter</InputLabel>
                 <Select
                   labelId="demo-multiple-checkbox-label"
@@ -212,7 +222,7 @@ export const BillList = () => {
                   input={<OutlinedInput label="Filter" />}
                   renderValue={(selected) => selected}
                   MenuProps={MenuProps}
-                  sx={{ width: 360 }}
+                  sx={{ width: 300 }}
                 >
                   {allFilters.map((item) => (
                     <MenuItem sx={{ p: 0 }} key={item.name} value={item.name}>
@@ -226,7 +236,7 @@ export const BillList = () => {
                 value={nameSurnameSearch}
                 onChange={(e) => upperCase(setNameSurnameSearch, e.target.value)}
                 size="big"
-                sx={{ width: 360 }}
+                sx={{ width: 300 }}
                 id="outlined-basic"
                 label={'Ime ili Prezime/Pib ili firma'}
                 variant="outlined"
@@ -235,9 +245,18 @@ export const BillList = () => {
                 value={addressSearch}
                 onChange={(e) => upperCase(setAddressSearch, e.target.value)}
                 size="big"
-                sx={{ width: 360 }}
+                sx={{ width: 300 }}
                 id="outlined-basic"
                 label={'Adresa'}
+                variant="outlined"
+              />
+              <TextField
+                value={additionalIdSearch}
+                onChange={(e) => setAdditionalIdSearch(e.target.value)}
+                size="big"
+                sx={{ width: 300 }}
+                id="outlined-basic"
+                label={'sifra tepiha'}
                 variant="outlined"
               />
             </Box>
@@ -302,10 +321,10 @@ export const BillList = () => {
                             }}
                           >
                             <TableCell align="left">
-                              {row.attributes.additionalId==='bez sifre'? '' :row.attributes.additionalId}
+                              {row.attributes.additionalId === 'bez sifre' ? '' : row.attributes.additionalId}
                             </TableCell>
                             <TableCell align="right">
-                              {new Date(row.attributes.date??row.attributes.createdAt).toLocaleDateString("en-GB")}
+                              {new Date(row.attributes.date ?? row.attributes.createdAt).toLocaleDateString("en-GB")}
                             </TableCell>
                             <TableCell align="left">
                               {row.attributes.client_id.data.attributes.surname || null}{" "}
@@ -338,6 +357,7 @@ export const BillList = () => {
                                 sx={{ minWidth: "160px" }}
                               >
                                 <MenuItem value="1">U magacinu</MenuItem>
+                                <MenuItem value="3">Transport</MenuItem>
                                 <MenuItem value="2">Vraceno klijentu</MenuItem>
                               </TextField>
                             </TableCell>

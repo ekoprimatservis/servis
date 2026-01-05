@@ -13,11 +13,21 @@ export const applyDiscount = (arr, discount) => {
 };
 
 export const formatPhoneNumber = (phoneNumberString) => {
-  var cleaned = ("" + phoneNumberString).replace("381", "0").replace(/\D/g, "");
-  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-  if (match) {
-    return "(" + match[1] + ") " + match[2] + "-" + match[3];
+  // Replace Serbia country code "381" with "0" and strip non-digits
+  const cleaned = ("" + phoneNumberString).replace(/^381/, "0").replace(/\D/g, "");
+
+  // Case: 10 digits → 064 123-4567
+  const match10 = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+  if (match10) {
+    return `${match10[1]} ${match10[2]}-${match10[3]}`;
   }
+
+  // Case: 9 digits → 064 123-456
+  const match9 = cleaned.match(/^(\d{3})(\d{3})(\d{3})$/);
+  if (match9) {
+    return `${match9[1]} ${match9[2]}-${match9[3]}`;
+  }
+
   return null;
 };
 export const formatLandLinePhone = (phoneNumberString) => {

@@ -14,7 +14,7 @@ export const Transport = () => {
                 <Box
                     sx={{
                         padding: "5px",
-                        height: "calc(100vh - 10px)",
+                        // height: "calc(100vh - 10px)",
                     }}
                 >
                     <BackButton route={"/home"} />
@@ -24,7 +24,7 @@ export const Transport = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            height: "90vh",
+                            // height: "90vh",
                             flexDirection: "column",
                             overflow: 'auto'
                         }}
