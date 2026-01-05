@@ -25,6 +25,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { AuthWrapper } from "../components/AuthWrapper";
 import { backgroundRowColor, theme } from "../helper/theme";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useFilters } from "../context/FiltersContext";
 
 
 // const allFilters = [
@@ -60,12 +61,17 @@ export const BillList = () => {
   const queryClient = useQueryClient();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(100);
-  const [selectedFilters, setSelectedFilters] = useState(
-    'Narudzbina | Ima sifru | Transport'
-  );
-  const [nameSurnameSearch, setNameSurnameSearch] = useState('')
-  const [addressSearch, setAddressSearch] = useState('')
-  const [additionalIdSearch, setAdditionalIdSearch] = useState('')
+  const {
+    selectedFilters,
+    setSelectedFilters,
+    nameSurnameSearch,
+    setNameSurnameSearch,
+    addressSearch,
+    setAddressSearch,
+    additionalIdSearch,
+    setAdditionalIdSearch,
+  } = useFilters();
+
   const [debouncedNameSurnameSearch, setDebouncedNameSurnameSearch] = useState('');
   const [debouncedAddressSearch, setDebouncedAddressSearch] = useState('');
   const [debouncedAdditionalIdSearch, setDebouncedAdditionalIdSearch] = useState('')

@@ -28,6 +28,7 @@ import { ExpensesCreate } from "./pages/ExpensesCreate";
 import { Transport } from "./pages/Transport";
 import { Statistics } from "./pages/Statistics";
 import { CompanyInfo } from "./pages/CompanyInfo";
+import { FiltersProvider } from "./context/FiltersContext";
 
 const queryClient = new QueryClient();
 
@@ -118,7 +119,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/bill/list",
-    element: <BillList />,
+    element: <FiltersProvider>
+      <BillList />
+    </FiltersProvider>
+    ,
     errorElement: <ErrorPage />,
   },
   {
